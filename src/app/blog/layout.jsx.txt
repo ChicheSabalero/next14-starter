@@ -1,0 +1,10 @@
+import PostCard from "@/components/postCard/postCard";
+
+const BlogLayuot = ({ children }) => {
+  return (
+    <>
+      <PostCard />
+    </>
+  );
+};
+export default BlogLayuot;
