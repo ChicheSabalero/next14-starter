@@ -2,49 +2,66 @@
   display: flex;
   gap: 100px;
 }
+
 .imageContainer {
   flex: 1;
   position: relative;
   height: calc(100vh - 200px);
 }
+
 .image {
+  width: 600px;
+  height: 100%;
   object-fit: cover;
 }
+
 .textContainer {
   flex: 2;
   display: flex;
   flex-direction: column;
   gap: 50px;
 }
+
 .title {
   font-size: 64px;
 }
+
 .detail {
   display: flex;
   gap: 20px;
 }
-.avatar {
-  object-fit: cover;
-  border-radius: 50%;
+
+.avatarContainer {
+  width: 50px;
+  height: 50px;
+  position: relative;
 }
-.detailtext {
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.detailText {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .detailTitle {
   color: #808080;
   font-weight: bold;
 }
+
 .detailValue {
   font-weight: 500;
 }
+
 .content {
   font-size: 20px;
 }
+
 @media (max-width: 768px) {
   .imageContainer {
     display: none;
-    justify-content: space-around;
   }
 }

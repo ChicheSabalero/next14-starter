@@ -1,61 +1,51 @@
 import Image from "next/image";
 import styles from "./post.module.css";
-import { Suspense } from "react";
-import { getPost } from "@/lib/data";
+import PostUser from "../../../components/postUser/postUser.jsx";
 
-// FETCH DATA WITH AN API
 const getData = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
-
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
   if (!res.ok) {
     throw new Error("Something went wrong");
   }
-
   return res.json();
-};
-
-export const generateMetadata = async ({ params }) => {
-  const { slug } = params;
-
-  const post = await getPost(slug);
-
-  return {
-    title: post.title,
-    description: post.desc,
-  };
 };
 
 const SinglePostPage = async ({ params }) => {
   const { slug } = params;
 
-  // FETCH DATA WITH AN API
   const post = await getData(slug);
 
-  // FETCH DATA WITHOUT AN API
-  // const post = await getPost(slug);
   return (
     <div className={styles.container}>
-      {post.img && (
-        <div className={styles.imgContainer}>
-          <Image src={post.img} alt="" fill className={styles.img} />
-        </div>
-      )}
+      <div className={styles.imageContainer}>
+        <Image
+          className={styles.image}
+          src="https://assets.goal.com/images/v3/bltce8c188796cf2b77/GettyImages-1257508567.jpg?auto=webp&format=pjpg&width=1080&quality=60"
+          alt=""
+          width={1000}
+          height={1000}
+        />
+      </div>
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post.title}</h1>
-        <div className={styles.detail}>
-          {post && (
-            <Suspense fallback={<div>Loading...</div>}>
-              <PostUser userId={post.userId} />
-            </Suspense>
-          )}
+        <div className={styles.details}>
           <div className={styles.detailText}>
-            <span className={styles.detailTitle}>Published</span>
-            <span className={styles.detailValue}>
-              {post.createdAt.toString().slice(4, 16)}
-            </span>
+            <div className={styles.avatarContainer}>
+              <Image
+                className={styles.avatar}
+                src="/noavatar.png"
+                alt="Avatar"
+                width={50}
+                height={50}
+              />
+            </div>
+            <PostUser userId={post.userID} />
+            <div className={styles.textContainer}>Published</div>
+            <div className={styles.detail}>01.01.2024</div>
+            <div className={styles.content}>Content</div>
+            {post.body}
           </div>
         </div>
-        <div className={styles.content}>{post.desc}</div>
       </div>
     </div>
   );
